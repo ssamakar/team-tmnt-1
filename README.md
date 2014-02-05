@@ -108,3 +108,8 @@ resolve:  {
 * Add an ng-repeat to the team view that spits out the character name for ever character in team.characters
 * Test your app and the links to the team page to see if they're working
 * **NOTE** If you're having problems getting the characters to show up, check the structure of the data being sent to the `team` resolve. Is it an Object? An Array? How can you send the data to the view in a way that makes sense?
+* Make a way in your team view to get back to the home page
+
+##Step 5 (Black Diamond): Make a nested view for each individual character
+* Add a `getCharacter` method for the turtleService using this url: 'http://pure-ocean-3603.herokuapp.com/character/'+charId
+* Nest a view and create the appropriate state for showing the character information when someone clicks on a character on the team page. Use the [angular-ui-router](https://github.com/angular-ui/ui-router) docs for help.
