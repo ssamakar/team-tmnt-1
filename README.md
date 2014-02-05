@@ -59,7 +59,7 @@ $urlRouterProvider.otherwise('/');
   * The resolve will have a list of variables that will be injected into your TeamCtrl, make one called `team`
   * Have `team` point to a function that returns teamService's `getTeam` method
 * Test your app and make sure that the /team page shows the team.
-* 
+
 ##Step 5: Use a promise for loading the team
 Now let's load our team from a remote source and use a promise in our service.
 * 
