@@ -90,7 +90,7 @@ resolve: {
 * Modify the team state in your app's stateProvider.
   * The URL should still point to `/team/:teamId` (teamId will be a passed param)
   * The controller should point to the Yeoman-made controller, TeamCtrl
-  * Make a resolve for the team state that populates a team var with the result of the TurtleService's `getTeam` method that you're going to make in a minute. You're going to need to pass the id from the url into the getTeam call, so reference that using Angular's $stateParams var, so your resolve should look something like this:
+  * Make a resolve for the team state that populates a `team` var with the result of the TurtleService's `getTeam` method that you're going to make in a minute. You're going to need to pass the id from the url into the getTeam call, so reference that using Angular's $stateParams var, so your resolve should look something like this:
 
 ```javascript
 resolve:  {
