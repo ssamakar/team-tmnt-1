@@ -42,7 +42,7 @@ $urlRouterProvider.otherwise('/');
   * Template: 'templates/team.html'
   * Controller: 'TeamCtrl'
 * Setup or create TeamCtrl and TeamView (hint: Yeoman makes this really easy ...)
-* Ensure that your application works as expected (/ should show the default main view and /team should show the team template)
+* Ensure that your application works as expected (/ should show the default main view and #/team/1 should show the team template)
 
 ##Step 3: Create a `turtleService`
 * Use Yeoman to create a turtleService.
