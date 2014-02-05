@@ -52,7 +52,7 @@ $urlRouterProvider.otherwise('/');
 ```javascript
 var deferred = $q.defer();
 ```
-  * Make sure you include $q as an injected dependency in the TurtleService.
+  * Make sure you include $q and $http as injected dependencies in the TurtleService.
   * Next, invoke $http with a "GET" request that references this url: 'http://pure-ocean-3603.herokuapp.com/team'
   * On the success function of the $http request, resolve the deferred object with the data retrieved.
   * Finally, return the deferred.promise from the getTeams method. Your getTeams method on the TurtleService should now look something like this:
