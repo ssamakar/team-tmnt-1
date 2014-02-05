@@ -21,8 +21,7 @@ Note the --save option, which ensures that this version is saved to your bower.j
 ```
 <div class="container" ui-view></div>
 ```
-* Take out all the html in the main.html template and replace it with an h2 called "Turtle Power"
-* Add a link with a ui-sref that points to "team" (a state we'll create momentarily)
+* Take out all the html in the main.html template and replace it with an h1 called "TMNT"
 
 ##Step 2: Setup your router/states
 `$stateProvider` from angular-ui-router is much more flexible and powerful than the default router in Angular. Let's set it up.
@@ -34,32 +33,78 @@ Note the --save option, which ensures that this version is saved to your bower.j
 ```javascript
 $urlRouterProvider.otherwise('/');
 ```
-* Configure the default state, `main`, with the template pointing to views/main.html and the controller specified as `MainCtrl`
+* Configure the default state, `main`, with the following:
+ * URL: '/'
+ * templateUrl: 'views/main.html'
+ * controller: 'MainCtrl',
 * Configure a "team" state with the following:
-  * URL: '/team' 
+  * URL: '/team/:teamId' 
   * Template: 'templates/team.html'
   * Controller: 'TeamCtrl'
 * Setup or create TeamCtrl and TeamView (hint: Yeoman makes this really easy ...)
 * Ensure that your application works as expected (/ should show the default main view and /team should show the team template)
-* 
-##Step 3: Populate the Team Page
-* Include an ng-repeat that iterates through each `member` of `team` and spits out a p tag with the member's name
-* Be sure to include a link that goes back to the home page
 
-##Step 4: Create a `teamService`
-* Use Yeoman to create a teamService.
-* Create a `getTeam` method on teamService that will return the team members. The data should look something like this:
+##Step 3: Create a `turtleService`
+* Use Yeoman to create a turtleService.
+* Create a `getTeams` method on turtleService that will return the team members. You'll get the team data from a remote server. You'll create a deferred object with a promise that will fetch the data using Angular's $http service and return the results. Here's how we'll do that:
+  * Inside the getTeams function, create a deffered object from Angular's `$q.defer()`
 
 ```javascript
-[{name: 'Michaelangelo'}, {name: 'Donatello'}, {name: 'Raphael'}, {name: 'Leonardo'}]
+var deferred = $q.defer();
+```
+  * Make sure you include $q as an injected dependency in the turtlService.
+  * Next, invoke $http with a "GET" request that references this url: 'http://pure-ocean-3603.herokuapp.com/team'
+  * On the success function of the $http request, resolve the deferred object with the data retrieved.
+  * Finally, return the deferred.promise from the getTeams method. Your getTeams method on the turtleService should now look something like this:
+
+```javascript
+getTeams: function() {
+  var deferred = $q.defer();
+
+  $http({method: 'GET', url: 'http://pure-ocean-3603.herokuapp.com/team'}).success(function(data) {
+      deferred.resolve(data);
+    }
+  );
+  return deferred.promise;
+}
 ```
 
-* Include the teamService as a dependency in your main app's config function
-* Add a `resolve` option to the team state in your router
-  * The resolve will have a list of variables that will be injected into your TeamCtrl, make one called `team`
-  * Have `team` point to a function that returns teamService's `getTeam` method
-* Test your app and make sure that the /team page shows the team.
+* Back in your main app.js, include the turtleService as a dependency in your main app's config function
+* Add a `resolve` option to the main state in your router
+  * The resolve will have a list of variables that will be injected into your MainCtrl, make one called `teams`
+  * Have `team` point to a function that returns teamService's `getTeams` method
 
-##Step 5: Use a promise for loading the team
-Now let's load our team from a remote source and use a promise in our service.
-* 
+```javascript
+resolve: {
+  teams: function(turtleService) {
+    return turtleService.getTeams();
+  }
+}
+```
+
+* In the MainCtrl, we need to send the results of the `teams` resolve to the scope. `$scope.teams = teams` (Be sure to specify the teams var as a dependency coming from the router).
+* Now, let's add the hook in the view. Head back over to your main.html view and add an h3 tag that repeats for every team in teams, and spits out an anchor tag with ng-href that points it the link to `#/team/{{team.id}}` and shows the team name.
+* Test your app to make sure the `/` route and the main state are working as expected.
+
+##Step 4: Add a team state/page
+* Add a team view using Yeoman
+* Add a team state to your app's stateProvider.
+  * The URL should point to `/team/:teamId` (teamId will be a passed param)
+  * The controller should point to a new controller you make with yeoman, TeamCtrl
+  * Make a resolve for the team state that populates a team var with the result of the turtleService's `getTeam` method that you're going to make in a minute. You're going to need to pass the id from the url into the getTeam call, so reference that using Angular's $stateParams var, so your resolve should look something like this:
+
+```javascript
+resolve:  {
+  team: function($stateParams, turtleService) {
+    return turtleService.getTeam($stateParams.teamId);
+  }
+}
+```
+
+* Go into the turtleService and make a getTeam method almost exactly as before, but with the following changes:
+  * the function will need to be passed a teamId
+  * the URL will be a combination of the sever team url and the teamId: http://pure-ocean-3603.herokuapp.com/team/'+teamId
+* In the TeamCtrl, we need to send the results of the `team` resolve to the scope, just like we did with the MainCtrl.
+* Add an ng-repeat to the team view that spits out the character name for ever character in team.characters
+* Test your app and the links to the team page to see if they're working
+* **NOTE** If you're having problems getting the characters to show up, check the structure of the data being sent to the `team` resolve. Is it an Object? An Array? How can you send the data to the view in a way that makes sense?
