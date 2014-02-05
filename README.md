@@ -44,18 +44,18 @@ $urlRouterProvider.otherwise('/');
 * Setup or create TeamCtrl and TeamView (hint: Yeoman makes this really easy ...)
 * Ensure that your application works as expected (/ should show the default main view and #/team/1 should show the team template)
 
-##Step 3: Create a `turtleService`
-* Use Yeoman to create a turtleService.
-* Create a `getTeams` method on turtleService that will return the team members. You'll get the team data from a remote server. You'll create a deferred object with a promise that will fetch the data using Angular's $http service and return the results. Here's how we'll do that:
+##Step 3: Create a `TurtleService`
+* Use Yeoman to create a TurtleService (*hint*: if you specify `turtle-service` when creating the service, it will automatically camel-case the name for you).
+* Create a `getTeams` method on TurtleService that will return the team members. You'll get the team data from a remote server. You'll create a deferred object with a promise that will fetch the data using Angular's $http service and return the results. Here's how we'll do that:
   * Inside the getTeams function, create a deffered object from Angular's `$q.defer()`
 
 ```javascript
 var deferred = $q.defer();
 ```
-  * Make sure you include $q as an injected dependency in the turtlService.
+  * Make sure you include $q as an injected dependency in the TurtleService.
   * Next, invoke $http with a "GET" request that references this url: 'http://pure-ocean-3603.herokuapp.com/team'
   * On the success function of the $http request, resolve the deferred object with the data retrieved.
-  * Finally, return the deferred.promise from the getTeams method. Your getTeams method on the turtleService should now look something like this:
+  * Finally, return the deferred.promise from the getTeams method. Your getTeams method on the TurtleService should now look something like this:
 
 ```javascript
 getTeams: function() {
@@ -69,15 +69,15 @@ getTeams: function() {
 }
 ```
 
-* Back in your main app.js, include the turtleService as a dependency in your main app's config function
+* Back in your main app.js, include the TurtleService as a dependency in your main app's config function
 * Add a `resolve` option to the main state in your router
   * The resolve will have a list of variables that will be injected into your MainCtrl, make one called `teams`
-  * Have `team` point to a function that returns teamService's `getTeams` method
+  * Have `team` point to a function that returns TurtleService's `getTeams` method
 
 ```javascript
 resolve: {
-  teams: function(turtleService) {
-    return turtleService.getTeams();
+  teams: function(TurtleService) {
+    return TurtleService.getTeams();
   }
 }
 ```
@@ -91,17 +91,17 @@ resolve: {
 * Add a team state to your app's stateProvider.
   * The URL should point to `/team/:teamId` (teamId will be a passed param)
   * The controller should point to a new controller you make with yeoman, TeamCtrl
-  * Make a resolve for the team state that populates a team var with the result of the turtleService's `getTeam` method that you're going to make in a minute. You're going to need to pass the id from the url into the getTeam call, so reference that using Angular's $stateParams var, so your resolve should look something like this:
+  * Make a resolve for the team state that populates a team var with the result of the TurtleService's `getTeam` method that you're going to make in a minute. You're going to need to pass the id from the url into the getTeam call, so reference that using Angular's $stateParams var, so your resolve should look something like this:
 
 ```javascript
 resolve:  {
-  team: function($stateParams, turtleService) {
-    return turtleService.getTeam($stateParams.teamId);
+  team: function($stateParams, TurtleService) {
+    return TurtleService.getTeam($stateParams.teamId);
   }
 }
 ```
 
-* Go into the turtleService and make a getTeam method almost exactly as before, but with the following changes:
+* Go into the TurtleService and make a getTeam method almost exactly as before, but with the following changes:
   * the function will need to be passed a teamId
   * the URL will be a combination of the sever team url and the teamId: http://pure-ocean-3603.herokuapp.com/team/'+teamId
 * In the TeamCtrl, we need to send the results of the `team` resolve to the scope, just like we did with the MainCtrl.
@@ -111,5 +111,5 @@ resolve:  {
 * Make a way in your team view to get back to the home page
 
 ##Step 5 (Black Diamond): Make a nested view for each individual character
-* Add a `getCharacter` method for the turtleService using this url: 'http://pure-ocean-3603.herokuapp.com/character/'+charId
+* Add a `getCharacter` method for the TurtleService using this url: 'http://pure-ocean-3603.herokuapp.com/character/'+charId
 * Nest a view and create the appropriate state for showing the character information when someone clicks on a character on the team page. Use the [angular-ui-router](https://github.com/angular-ui/ui-router) docs for help.
