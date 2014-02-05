@@ -11,7 +11,7 @@ The goal of this project is to practice using the angular-ui-router combined wit
 * Using bower, install angular-ui-router. **Note** due to a recently-introduced [bug](https://github.com/angular-ui/ui-router/commit/ccdab193315f304eb3be5f5b97c47a926c79263e) in angular-ui-router, you need to install a specific version of the bower package or the router will not work. Specifically:
 
 ```
-bower install --save 0.2.8-bowratic-tedium
+bower install --save angular-ui-router#0.2.8-bowratic-tedium
 ```
 
 Note the --save option, which ensures that this version is saved to your bower.json file.
