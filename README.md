@@ -87,7 +87,6 @@ resolve: {
 * Test your app to make sure the `/` route and the main state are working as expected.
 
 ##Step 4: Add a team state/page
-* Add a team view using Yeoman
 * Add a team state to your app's stateProvider.
   * The URL should point to `/team/:teamId` (teamId will be a passed param)
   * The controller should point to a new controller you make with yeoman, TeamCtrl
