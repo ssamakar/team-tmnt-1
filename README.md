@@ -34,13 +34,13 @@ Note the --save option, which ensures that this version is saved to your bower.j
 $urlRouterProvider.otherwise('/');
 ```
 * Configure the default state, `main`, with the following:
- * URL: '/'
+ * url: '/'
  * templateUrl: 'views/main.html'
  * controller: 'MainCtrl',
 * Configure a "team" state with the following:
-  * URL: '/team/:teamId' 
-  * Template: 'templates/team.html'
-  * Controller: 'TeamCtrl'
+  * url: '/team/:teamId' 
+  * templateUrl: 'templates/team.html'
+  * controller: 'TeamCtrl'
 * Setup or create TeamCtrl and TeamView (hint: Yeoman makes this really easy ...)
 * Ensure that your application works as expected (/ should show the default main view and #/team/1 should show the team template)
 
