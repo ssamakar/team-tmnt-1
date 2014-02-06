@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('teamTmntApp')
-  .service('turtleService', function turtleService($q, $http) {
+  .service('TurtleService', function TurtleService($q, $http) {
     return {
       getTeams: function() {
         var deferred = $q.defer();

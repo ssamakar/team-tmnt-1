@@ -10,8 +10,8 @@ angular.module('teamTmntApp', ['ui.router']).config(function($stateProvider, $ur
       templateUrl: 'views/main.html',
       controller: 'MainCtrl',
       resolve: {
-        teams: function(turtleService) {
-          return turtleService.getTeams();
+        teams: function(TurtleService) {
+          return TurtleService.getTeams();
         }
       }
     })
@@ -20,8 +20,8 @@ angular.module('teamTmntApp', ['ui.router']).config(function($stateProvider, $ur
       templateUrl: 'views/team.html',
       controller: 'TeamCtrl',
       resolve:  {
-        team: function($stateParams, turtleService) {
-          return turtleService.getTeam($stateParams.teamId);
+        team: function($stateParams, TurtleService) {
+          return TurtleService.getTeam($stateParams.teamId);
         }
       }
     });
