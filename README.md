@@ -34,13 +34,13 @@ Note the --save option, which ensures that this version is saved to your bower.j
 $urlRouterProvider.otherwise('/');
 ```
 * Configure the default state, `main`, with the following:
- * URL: '/'
+ * url: '/'
  * templateUrl: 'views/main.html'
  * controller: 'MainCtrl',
 * Configure a "team" state with the following:
-  * URL: '/team/:teamId' 
-  * Template: 'templates/team.html'
-  * Controller: 'TeamCtrl'
+  * url: '/team/:teamId' 
+  * templateUrl: 'templates/team.html'
+  * controller: 'TeamCtrl'
 * Setup or create TeamCtrl and TeamView (hint: Yeoman makes this really easy ...)
 * Ensure that your application works as expected (/ should show the default main view and #/team/1 should show the team template)
 
@@ -83,7 +83,7 @@ resolve: {
 ```
 
 * In the MainCtrl, we need to send the results of the `teams` resolve to the scope. `$scope.teams = teams` (Be sure to specify the teams var as a dependency coming from the router).
-* Now, let's add the hook in the view. Head back over to your main.html view and add an h3 tag that repeats for every team in teams, and spits out an anchor tag with ng-href that points it the link to `#/team/{{team.id}}` and shows the team name.
+* Now, let's add the hook in the view. Head back over to your main.html view and add an h3 tag that repeats for every team in teams, and spits out an anchor tag with [ui-sref](https://github.com/angular-ui/ui-router/wiki/Quick-Reference#wiki-ui-sref) that points it the link to `#/team/{{team.id}}` and shows the team name.
 * Test your app to make sure the `/` route and the main state are working as expected.
 
 ##Step 4: Add a team state/page
