@@ -69,10 +69,10 @@ getTeams: function() {
 }
 ```
 
-* Back in your main app.js, include the TurtleService as a dependency in your main app's config function
-* Add a `resolve` option to the main state in your router
+* Back in your main app.js, add a `resolve` option to the main state in your router
   * The resolve will have a list of variables that will be injected into your MainCtrl, make one called `teams`
   * Have `team` point to a function that returns TurtleService's `getTeams` method
+  * Notice that we inject TurtleService as a dependency for this resolve
 
 ```javascript
 resolve: {
