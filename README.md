@@ -83,7 +83,7 @@ resolve: {
 ```
 
 * In the MainCtrl, we need to send the results of the `teams` resolve to the scope. `$scope.teams = teams` (Be sure to specify the teams var as a dependency coming from the router).
-* Now, let's add the hook in the view. Head back over to your main.html view and add an h3 tag that repeats for every team in teams, and spits out an anchor tag with ng-href that points it the link to `#/team/{{team.id}}` and shows the team name.
+* Now, let's add the hook in the view. Head back over to your main.html view and add an h3 tag that repeats for every team in teams, and spits out an anchor tag with [ui-sref](https://github.com/angular-ui/ui-router/wiki/Quick-Reference#wiki-ui-sref) that points it the link to `#/team/{{team.id}}` and shows the team name.
 * Test your app to make sure the `/` route and the main state are working as expected.
 
 ##Step 4: Add a team state/page
