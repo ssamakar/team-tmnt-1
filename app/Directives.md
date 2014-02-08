@@ -141,3 +141,47 @@ angular.module('tmntApp')
   });
 ```
 - Check out that hott, automagical table action!
+
+---
+### dv-popup
+- Run `yo angular:directive dv-popup`. Yeoman will create a new directive for you named dv-popup.
+- Open `main.html` and add a the following markup.
+
+```
+<button class="open-popup">Click to Open Popup</button>
+
+<hr>
+
+<div dv-popup="button">
+    Hello world! I am a popup that you chose to open!!!
+</div>
+```
+
+- Open `app/scripts/directives/dv-popup.js`
+- Change the restrict from an element (E) to an attribute (A) restriction
+- Add a template that looks like this
+
+```
+<div class="popup" style="display: none" ng-transclude></div>
+```
+
+- Set `transclude: true`
+- Create a link function like this
+
+```
+link: function postLink(scope, element, attrs) {
+        var selector = attrs.dvPopup,
+          targets = angular.element(document.body).children(selector);
+
+        targets.on('click', function () {
+          element.find('.popup').toggle();
+        });
+
+      }
+``` 
+
+- Now click the button and notice that you get an error.
+- Open up your debugger (command-option-j) in Chrome and open up `dv-popup.js` using command-O and typing the filename to search for it.
+- Place a debugger on the line that’s throwing the error.
+- Click the button, and when the debugger stops on the bad line, open up your console and experiment with ways to resolve the error.
+- This is a tricky error, so don’t get discouraged. Think about what the line of code is trying to accomplish. Think about what’s going wrong. Try to find a way around it. Google ways to find elements in Angular. Google how to show and hide things in Angular.
