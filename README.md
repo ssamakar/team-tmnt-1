@@ -53,7 +53,7 @@ $urlRouterProvider.otherwise('/');
 var deferred = $q.defer();
 ```
   * Make sure you include $q and $http as injected dependencies in the TurtleService.
-  * Next, invoke $http with a "GET" request that references this url: 'http://pure-ocean-3603.herokuapp.com/team'
+  * Next, invoke $http with a "GET" request that references this url: 'http://tmnt.devmounta.in/team'
   * On the success function of the $http request, resolve the deferred object with the data retrieved.
   * Finally, return the deferred.promise from the getTeams method. Your getTeams method on the TurtleService should now look something like this:
 
@@ -61,7 +61,7 @@ var deferred = $q.defer();
 getTeams: function() {
   var deferred = $q.defer();
 
-  $http({method: 'GET', url: 'http://pure-ocean-3603.herokuapp.com/team'}).success(function(data) {
+  $http({method: 'GET', url: 'http://tmnt.devmounta.in/team'}).success(function(data) {
       deferred.resolve(data);
     }
   );
@@ -102,7 +102,7 @@ resolve:  {
 
 * Go into the TurtleService and make a getTeam method almost exactly as before, but with the following changes:
   * the function will need to be passed a teamId
-  * the URL will be a combination of the sever team url and the teamId: http://pure-ocean-3603.herokuapp.com/team/'+teamId
+  * the URL will be a combination of the sever team url and the teamId: http://tmnt.devmounta.in/team/'+teamId
 * In the TeamCtrl, we need to send the results of the `team` resolve to the scope, just like we did with the MainCtrl.
 * Add an ng-repeat to the team view that spits out the character name for ever character in team.characters
 * Test your app and the links to the team page to see if they're working
@@ -110,5 +110,5 @@ resolve:  {
 * Make a way in your team view to get back to the home page
 
 ##Step 5 (Black Diamond): Make a nested view for each individual character
-* Add a `getCharacter` method for the TurtleService using this url: 'http://pure-ocean-3603.herokuapp.com/character/'+charId
+* Add a `getCharacter` method for the TurtleService using this url: 'http://tmnt.devmounta.in/character/'+charId
 * Nest a view and create the appropriate state for showing the character information when someone clicks on a character on the team page. Use the [angular-ui-router](https://github.com/angular-ui/ui-router) docs for help.
