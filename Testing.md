@@ -522,6 +522,7 @@ Making sure to inject ```$httpBackend```. It's a simple test once you realize ho
         }));
 
 - Test ```turtleService.getTeams()```
+
         it('should do get teams', inject(function ($httpBackend) {
           $httpBackend.expectGET('http://pure-ocean-3603.herokuapp.com/team').respond([{id: 1, name: 'Streganona'}, {id: 2, name: 'Mary Poppins'}]);
 
