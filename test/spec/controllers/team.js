@@ -7,16 +7,19 @@ describe('Controller: TeamCtrl', function () {
 
   var TeamCtrl,
     scope;
+  var team = [{}];
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     TeamCtrl = $controller('TeamCtrl', {
-      $scope: scope
+      $scope: scope,
+      team: team
     });
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+    console.log(team);
+    expect(typeof scope.team).toBe('object');
   });
 });

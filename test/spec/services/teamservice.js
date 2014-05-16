@@ -11,8 +11,8 @@ describe('Service: Teamservice', function () {
     Teamservice = _Teamservice_;
   }));
 
-  it('should do something', function () {
-    expect(!!Teamservice).toBe(true);
-  });
+  // it('should do something', function () {
+  //   expect(!!Teamservice).toBe(true);
+  // });
 
 });
